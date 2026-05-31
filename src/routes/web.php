@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use Livewire\Livewire;
-use Illuminate\Support\Facades\Response;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\TopUpPaymentController;
+use App\Http\Controllers\HomeController;
 
 /* NOTE: Do Not Remove
 / Livewire asset handling if using sub folder in domain
@@ -18,6 +20,7 @@ Livewire::setScriptRoute(function ($handle) {
 /*
 / END
 */
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.send');
+Route::post('/topups', [TopUpPaymentController::class, 'store'])->name('topups.store');
